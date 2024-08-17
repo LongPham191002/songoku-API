@@ -11,13 +11,18 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { CharacterModel } from './models/dragonball.model';
 import {planetsReducer} from "./ngrx/planets/planets.reducer";
 import {PlanetsEffects} from "./ngrx/planets/planets.effects";
+import {profileReducer} from "./ngrx/profile/profile.reducer";
+import {ProfileEffects} from "./ngrx/profile/profile.effect";
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({eventCoalescing: true}), provideRouter(routes), provideAnimationsAsync(), provideStore({
+  providers: [provideZoneChangeDetection({eventCoalescing: true}), provideRouter(routes), provideAnimationsAsync(),
+    provideStore({
     'characters':charactersReducer,
-    'planets':planetsReducer
+    'planets':planetsReducer,
+      "profile": profileReducer,
   }),
-    provideEffects(CharactersEffects,PlanetsEffects),
+
+    provideEffects(CharactersEffects,PlanetsEffects,ProfileEffects),
     provideHttpClient()]
 
 };

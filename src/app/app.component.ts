@@ -12,6 +12,7 @@ import {PlanetModel} from "./models/dragonball.model";
 import {PlanetsState} from "./ngrx/planets/planets.state";
 import * as planetActions from './ngrx/planets/planets.actions';
 import {of} from "rxjs";
+import {ProfileService} from "./services/profile.service";
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,8 @@ export class AppComponent {
   isLoadingDetailList$ = this.store.select('planets', 'isLoadingList');
   planetsList$ = this.store.select('planets', 'planetsList');
 
-  constructor(private store: Store<{ characters: CharactersState, planets: PlanetsState }>)
+  constructor(private store: Store<{ characters: CharactersState, planets: PlanetsState }>,
+              private profileService: ProfileService)
   {
     this.store.dispatch(CharacterActions.getCharactersList());
     this.store.dispatch(planetActions.getPlanetsList());
